@@ -1,11 +1,15 @@
+import './global.css';
+import styles from './App.module.css';
+import { Header} from './components/Header';
+// import { TaskList } from './components/TaskList';
 
-
-function App() {
+export function App() {
   return (
-    <div className="App">
-      <h1>resct-todo-list</h1>
+    <div>
+      <Header/>
+      <div className={styles.content}>
+        {/* <TaskList/> */}
+      </div>
     </div>
   )
 }
-
-export default App
