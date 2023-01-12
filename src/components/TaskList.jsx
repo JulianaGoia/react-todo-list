@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { TaskCard } from './TaskCard';
+// import { TaskNoneMessage } from './TaskNoneMessage';
 import styles from './TaskList.module.css';
 
 export function TaskList() {
 
-    const [tasks, setTask ] = useState([
-        'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.'
-    ]);
+    const [tasks, setTask ] = useState(['']);
 
     const [newTask, setNewTask] = useState('');
 
@@ -18,6 +17,14 @@ export function TaskList() {
 
     function handleNewTaskChange() {
         setNewTask(event.target.value);
+    }
+
+    function deleteTask(taskToDelete) {
+        const tasksWithoutDeletedOne = tasks.filter(task => {
+            return task != taskToDelete;
+        })
+
+        setTask(tasksWithoutDeletedOne);
     }
 
     return (
@@ -33,10 +40,19 @@ export function TaskList() {
                 </button>
             </form>
             <div>
+                <p>{tasks.length}</p>
+                {/* filter e pegar o lengt das tarefas concluidas */}
+                <p>{tasks.length}</p>
+            </div>
+            <div>
                 {tasks.map(task => {
-                    return <TaskCard text={task}/>
+                    return <TaskCard text={task} onDeleteTask={deleteTask}/>
                 })}
             </div>
         </div>
     );
 }
+
+// deixar checkbox dinamico
+// ordenar lista quando uma tarefa for concluida ir para o final da lista
+// contage mostrando length das tarefas concluidas e as nao concluidas
